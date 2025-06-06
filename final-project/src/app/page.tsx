@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Heart } from "lucide-react";
+import { useEffect, useState } from "react";
 
 function getRandomStyles() {
     return {
@@ -18,36 +19,40 @@ function getRandomStyles() {
 
 function Home() {
     const router = useRouter();
+    const [heartStyles, setHeartStyles] = useState<
+        Array<ReturnType<typeof getRandomStyles>>
+    >([]);
 
+    useEffect(() => {
+        // Only run on client
+        setHeartStyles(Array.from({ length: 30 }, getRandomStyles));
+    }, []);
     return (
         <div className="relative min-h-screen flex flex-col items-center justify-center bg-pink-100 text-center overflow-hidden">
             <div className="absolute inset-0 z-0 animate-aurora bg-[radial-gradient(circle_at_30%_30%,rgba(255,192,203,0.4),transparent_60%),radial-gradient(circle_at_70%_70%,rgba(255,182,193,0.3),transparent_60%)]" />
 
             <div className="absolute inset-0 pointer-events-none z-0">
-                {Array.from({ length: 30 }).map((_, i) => {
-                    const styles = getRandomStyles();
-                    return (
-                        <motion.div
-                            key={i}
-                            className="absolute text-pink-400"
-                            style={styles}
-                            animate={{
-                                y: [0, -30 - Math.random() * 30, 0],
-                                x: [0, Math.random() * 10 - 5, 0],
-                                rotate: [0, 15, -15, 0],
-                            }}
-                            transition={{
-                                duration: 5 + Math.random() * 5,
-                                repeat: Infinity,
-                                ease: "easeInOut",
-                                delay: Math.random(),
-                            }}
-                            whileHover={{ scale: 1.5, opacity: 1 }}
-                        >
-                            <Heart fill="currentColor" />
-                        </motion.div>
-                    );
-                })}
+                {heartStyles.map((styles, i) => (
+                    <motion.div
+                        key={i}
+                        className="absolute text-pink-400"
+                        style={styles}
+                        animate={{
+                            y: [0, -30 - Math.random() * 30, 0],
+                            x: [0, Math.random() * 10 - 5, 0],
+                            rotate: [0, 15, -15, 0],
+                        }}
+                        transition={{
+                            duration: 5 + Math.random() * 5,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: Math.random(),
+                        }}
+                        whileHover={{ scale: 1.5, opacity: 1 }}
+                    >
+                        <Heart fill="currentColor" />
+                    </motion.div>
+                ))}
             </div>
 
             <motion.div
