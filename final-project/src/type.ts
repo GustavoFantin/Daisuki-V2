@@ -25,6 +25,6 @@ export type UserProfile = {
     password: string;
     email: string;
     role: string;
-    selfIrontroduction: string;
+    selfIntroduction: string;
     age: number;
 };
