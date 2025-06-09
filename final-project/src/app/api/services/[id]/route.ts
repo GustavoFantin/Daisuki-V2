@@ -2,7 +2,7 @@ import { connectDB } from "@/lib/mongodb"
 import Service from "@/models/services.model"
 import { NextResponse } from "next/server"
 
-export async function GET( _: Request, { params }: { params: { id: string } }) {
+export async function GET(_: Request, { params }: { params: Promise<{ id: string }> }) {
 
    try {
       await connectDB()
