@@ -11,16 +11,16 @@ export async function GET( _: Request, { params }: { params: { id: string } }) {
    const cookieStore = await cookies()
    const hasCookie = cookieStore.has('token')
    
-   if(!hasCookie) {
-      const { id } = params
+   if(!hasCookie) return NextResponse.json({ message: "You have to login to access this route", status: 404 });
 
-      const user = await User.findById(id)
-      if (!user) {
-         return;
-      }
-   }
+   const { id } = await params
 
+   const user = await User.findById(id)
    
+   if (!user) return NextResponse.json({ message: "User not found!", status: 404 })
+
+   return NextResponse.json(user, { status: 200 })
+
 }
 
 export async function PUT(req: Request, { params }: { params: { id: string }}) {
@@ -30,7 +30,7 @@ export async function PUT(req: Request, { params }: { params: { id: string }}) {
          const hasCookie = cookieStore.has('token')
 
          if(hasCookie) {
-            const { id } = params
+            const { id } = await params
          const { username, password, age, email } = await req.json()
          const updatedUser: Partial<IUser> = { username, age, email }
 
@@ -45,7 +45,7 @@ export async function PUT(req: Request, { params }: { params: { id: string }}) {
 
          if (!user) return NextResponse.json({ message: "User not found", status: 404 })
 
-         NextResponse.json({ message: "User updated", status: 200 })
+         return NextResponse.json({ message: "User updated", status: 200 })
          }
 
    } catch (err) {

@@ -10,7 +10,6 @@ import { cookies } from "next/headers";
 export async function POST(req: Request) {
    try {
       const { username, password } =  await req.json()
-      const existUser = await User.exists({ username })
       if(!username || !password) {
          return NextResponse.json({ message: "Username/Password missing!", status:400 })
       }
