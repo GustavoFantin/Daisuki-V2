@@ -71,7 +71,7 @@ export default function RentalGirlfriendList() {
     }, [router]);
 
     useEffect(() => {
-        fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/services`, {
+        fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/services`, {
             credentials: "include",
         })
             .then((res) => res.json())
@@ -139,7 +139,7 @@ export default function RentalGirlfriendList() {
         setIsRentalModalOpen(false);
 
         const res = await fetch(
-            `${process.env.NEXT_PUBLIC_BACKEND_URL}/purchase/create-checkout-session`,
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/purchase/create-checkout-session`,
             {
                 method: "POST",
                 credentials: "include",
@@ -343,6 +343,8 @@ export default function RentalGirlfriendList() {
                                         src={girl.avatar as string}
                                         alt={girl.name}
                                         className="absolute w-full h-full object-cover"
+                                        width={300}
+                                        height={300}
                                     />
                                 </div>
                                 <div className="p-4">
@@ -371,6 +373,9 @@ export default function RentalGirlfriendList() {
             {selectedGirl && (
                 <Dialog open={isProfileOpen} onOpenChange={setIsProfileOpen}>
                     <DialogContent className="w-full max-w-lg md:max-w-4xl p-0 bg-gray-50 flex flex-col md:flex-row !rounded-lg">
+                        <DialogTitle className="sr-only">
+                            {selectedGirl.name} Profile
+                        </DialogTitle>
                         <div className="flex flex-col md:flex-row h-full w-full">
                             <div className="w-full md:w-1/2 p-4 md:p-8 flex flex-col items-center">
                                 <div className="rounded-full overflow-hidden w-40 h-40 md:w-64 md:h-64 border-2 border-black mx-auto">
@@ -378,6 +383,8 @@ export default function RentalGirlfriendList() {
                                         src={selectedGirl.avatar as string}
                                         alt={selectedGirl.name}
                                         className="w-full h-full object-cover"
+                                        width={300}
+                                        height={300}
                                     />
                                 </div>
 
@@ -446,6 +453,7 @@ export default function RentalGirlfriendList() {
             >
                 <DialogContent className="w-full max-w-xs sm:max-w-md p-4 sm:p-6">
                     <div className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
+                        <DialogTitle className="sr-only">Rental</DialogTitle>
                         <DialogClose className="h-4 w-4">
                             <span className="sr-only">Close</span>
                         </DialogClose>
