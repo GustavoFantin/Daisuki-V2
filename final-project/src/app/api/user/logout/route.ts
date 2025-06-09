@@ -9,6 +9,13 @@ import { strict } from "assert";
 export async function POST(req: Request) {
    try {
       (await cookies()).delete('token')
+
+      const cookieStore = await cookies()
+      const hasCookie = cookieStore.has('token')
+      if (hasCookie) {
+         console.log("")
+      }
+
       return NextResponse.json({ message: "Logged out successfully", status: 204 })
    } catch (error) {
       console.error(error)
