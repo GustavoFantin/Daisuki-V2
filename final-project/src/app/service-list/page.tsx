@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dialog";
 import { Calendar } from "@/components/ui/calendar";
 import { Girl } from "@/type";
+import Image from "next/image";
 
 export default function RentalGirlfriendList() {
     const [girls, setGirls] = useState<Girl[]>([]);
@@ -338,7 +339,7 @@ export default function RentalGirlfriendList() {
                                 className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:scale-105"
                             >
                                 <div className="relative pb-full">
-                                    <img
+                                    <Image
                                         src={girl.avatar as string}
                                         alt={girl.name}
                                         className="absolute w-full h-full object-cover"
@@ -373,7 +374,7 @@ export default function RentalGirlfriendList() {
                         <div className="flex flex-col md:flex-row h-full w-full">
                             <div className="w-full md:w-1/2 p-4 md:p-8 flex flex-col items-center">
                                 <div className="rounded-full overflow-hidden w-40 h-40 md:w-64 md:h-64 border-2 border-black mx-auto">
-                                    <img
+                                    <Image
                                         src={selectedGirl.avatar as string}
                                         alt={selectedGirl.name}
                                         className="w-full h-full object-cover"
@@ -388,7 +389,9 @@ export default function RentalGirlfriendList() {
                                         </span>
                                     </div>
                                     <div className="flex gap-2">
-                                        <span>I'm Stopped Counting at </span>
+                                        <span>
+                                            I&apos;m Stopped Counting at{" "}
+                                        </span>
                                         <span className="font-semibold">
                                             {selectedGirl.age}
                                         </span>

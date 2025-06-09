@@ -40,6 +40,7 @@ const SignUpPage = () => {
             router.push("/signin");
         } catch (e) {
             setError("Sign up failed");
+            console.error("Sign up failed", e);
         }
     };
 
