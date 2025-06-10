@@ -58,9 +58,12 @@ const RentalGirlfriendAdmin = () => {
     const router = useRouter();
 
     useEffect(() => {
-        fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/get-user-cookie`, {
-            credentials: "include",
-        })
+        fetch(
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user/get-user-cookie`,
+            {
+                credentials: "include",
+            }
+        )
             .then(async (res) => {
                 if (!res.ok) throw new Error("No user");
                 const data = await res.json();
@@ -72,7 +75,7 @@ const RentalGirlfriendAdmin = () => {
                 console.log("No user data");
             });
 
-        fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/services`, {
+        fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/services`, {
             credentials: "include",
         })
             .then((res) => res.json())
@@ -145,7 +148,7 @@ const RentalGirlfriendAdmin = () => {
             }
 
             await fetch(
-                `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/service`,
+                `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/admin/service`,
                 {
                     credentials: "include",
                     method: "POST",
@@ -163,7 +166,7 @@ const RentalGirlfriendAdmin = () => {
     const handleUpdate = async () => {
         try {
             await fetch(
-                `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/service/${formData.id}`,
+                `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/admin/service/${formData.id}`,
                 {
                     credentials: "include",
                     method: "PUT",
@@ -183,7 +186,7 @@ const RentalGirlfriendAdmin = () => {
     const handleDelete = async () => {
         try {
             await fetch(
-                `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/service/${currentGirlfriend?.id}`,
+                `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/admin/service/${currentGirlfriend?.id}`,
                 {
                     method: "DELETE",
                     credentials: "include",
