@@ -1,11 +1,11 @@
 import { connectDB } from "@/lib/mongodb";
-import User, { IUser } from "@/models/User";
+import User, { IUser } from "@/models/user.model";
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import { cookies } from "next/headers";
 
 
-export async function GET( _: Request, { params }: { params: { id: string } }) {
+export async function GET( _: Request, { params }: { params: Promise<{ id: string }> }) {
    await connectDB()
 
    const cookieStore = await cookies()
@@ -23,7 +23,7 @@ export async function GET( _: Request, { params }: { params: { id: string } }) {
 
 }
 
-export async function PUT(req: Request, { params }: { params: { id: string }}) {
+export async function PUT(req: Request, { params }: { params: Promise<{ id: string }>}) {
    try {
       await connectDB()
          const cookieStore = await cookies()
