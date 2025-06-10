@@ -30,6 +30,7 @@ const SignInPage = () => {
             if (!res.ok) {
                 setError("Invalid credentials");
                 console.error("Invalid credentials");
+                router.push("/signin");
                 return;
             }
 

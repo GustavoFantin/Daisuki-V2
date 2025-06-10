@@ -20,7 +20,7 @@ const SignUpPage = () => {
         setError("");
         try {
             const res = await fetch(
-                `${process.env.NEXT_PUBLIC_BACKEND_URL}//apiuser/signup`,
+                `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user/signup`,
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
