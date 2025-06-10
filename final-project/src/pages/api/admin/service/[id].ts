@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import formidable from "formidable";
+import { IncomingForm } from "formidable";
 import Service from "@/models/services.model";
 import { uploadFileToS3 } from "@/app/utils/s3Uploader";
 
@@ -16,7 +16,7 @@ export default async function handler(
     const { id } = req.query;
 
     if (req.method === "PUT") {
-        const form = new formidable.IncomingForm();
+        const form = new IncomingForm();
         form.parse(req, async (err, fields, files) => {
             if (err) {
                 res.status(500).json({ error: err });

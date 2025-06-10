@@ -136,7 +136,7 @@ const Header = () => {
                     {userId && (
                         <>
                             <button
-                                className="cursor-pointer px-4 py-2 border-black border-1 rounded-full hover:border-pink-600 hover:text-pink-600 hover:scale-110 transition-transform duration-300"
+                                className="flex items-center gap-2 px-4 py-2 border border-black rounded-full hover:border-pink-600 hover:text-pink-600 hover:scale-110 transition-transform duration-300"
                                 onClick={handleLogout}
                             >
                                 Log out
@@ -144,21 +144,21 @@ const Header = () => {
                             {isAdmin && (
                                 <Link
                                     href="/admin"
-                                    className="text-black-500 hover:text-pink-600 transition duration-300"
+                                    className="flex items-center justify-center w-10 h-10 rounded-full hover:bg-pink-100 transition"
                                     aria-label="Admin page"
                                 >
-                                    <span className="text-lg font-bold">
-                                        <Info />
-                                    </span>
+                                    <Info className="w-7 h-7" />
                                 </Link>
                             )}
                             <button
                                 onClick={() => setOpen(true)}
-                                className="text-black-500 hover:text-pink-600 transition duration-300"
+                                className="flex items-center gap-2 text-black-500 hover:text-pink-600 transition duration-300"
                                 aria-label="Show user info"
                             >
                                 <UserCircle className="w-8 h-8" />
-                                <h3>USER PROFILE</h3>
+                                <span className="text-xs font-semibold">
+                                    USER PROFILE
+                                </span>
                             </button>
                             <UserInfoModal
                                 userInfo={userInfo}
