@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import formidable from "formidable";
+import { IncomingForm } from "formidable";
 import Service from "@/models/services.model";
 import { uploadFileToS3 } from "@/app/utils/s3Uploader";
 
@@ -18,7 +18,7 @@ export default async function handler(
         return;
     }
 
-    const form = new formidable.IncomingForm();
+    const form = new IncomingForm();
 
     form.parse(req, async (err, fields, files) => {
         if (err) {
@@ -31,7 +31,6 @@ export default async function handler(
             return;
         }
 
-        // formidable v2: files.avatar can be array, handle accordingly
         const file = Array.isArray(files.avatar)
             ? files.avatar[0]
             : files.avatar;
@@ -39,27 +38,19 @@ export default async function handler(
         const avatarUrl = await uploadFileToS3(file);
 
         try {
-            const {
-                name,
-                height,
-                age,
-                nationality,
-                self_introduction,
-                price,
-                available_time,
-                price_id,
-            } = fields;
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const getValue = (v: any) => (Array.isArray(v) ? v[0] : v);
 
             const service = await Service.create({
                 avatar: avatarUrl,
-                name,
-                height,
-                age,
-                nationality,
-                self_introduction,
-                price,
-                available_time,
-                price_id,
+                name: getValue(fields.name),
+                height: Number(getValue(fields.height)),
+                age: Number(getValue(fields.age)),
+                nationality: getValue(fields.nationality),
+                self_introduction: getValue(fields.self_introduction),
+                price: Number(getValue(fields.price)),
+                available_time: getValue(fields.available_time),
+                price_id: getValue(fields.price_id),
             });
 
             res.status(201).json(service);
