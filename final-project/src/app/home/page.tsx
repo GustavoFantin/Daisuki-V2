@@ -49,12 +49,9 @@ export default function NewHome() {
               Sign In / Login Here
             </Button>
           </a>
-          <div>
-            Find The Perfect Partner For You...
-          </div>
         </div>
         <br />
       </div>
-    </div>{' '}
+    </div>
   </>
 }

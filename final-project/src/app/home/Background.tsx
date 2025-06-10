@@ -37,7 +37,7 @@ function Carousel({ radius = 1.4, count = 8 }) {
   return Array.from({ length: count }, (_, i) => (
     <Card
       key={i}
-      url={`/img${Math.floor(i % 10) + 1}_.jpg`}
+      url={`/home/girl${Math.floor(i % 10) + 1}_.png`}
       position={[Math.sin((i / count) * Math.PI * 2) * radius, 0, Math.cos((i / count) * Math.PI * 2) * radius]}
       rotation={[0, Math.PI + (i / count) * Math.PI * 2, 0]}
     />
@@ -63,7 +63,7 @@ function Card({ url, ...props }) {
 
 function Banner(props) {
   const ref = useRef()
-  const texture = useTexture('/work_.png')
+  const texture = useTexture('/home/work_.png')
   texture.wrapS = texture.wrapT = THREE.RepeatWrapping
   const scroll = useScroll()
   useFrame((state, delta) => {
@@ -73,7 +73,7 @@ function Banner(props) {
   return (
     <mesh ref={ref} {...props}>
       <cylinderGeometry args={[1.6, 1.6, 0.14, 128, 16, true]} />
-      <meshSineMaterial map={texture} map-anisotropy={16} map-repeat={[30, 1]} side={THREE.DoubleSide} toneMapped={false} />
+      <meshSineMaterial map={texture} map-anisotropy={30} map-repeat={[14, 1]} side={THREE.DoubleSide} toneMapped={false} />
     </mesh>
   )
 }
