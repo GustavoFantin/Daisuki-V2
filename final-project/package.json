@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "email": "email dev --dir src/emails"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.825.0",
@@ -25,6 +26,7 @@
     "@tsparticles/engine": "^3.8.1",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.8.1",
+    "@react-email/components": "0.0.42",
     "bcrypt": "^6.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -40,9 +42,11 @@
     "multer": "^2.0.1",
     "next": "15.3.3",
     "next-themes": "^0.4.6",
-    "react": "^19.0.0",
+    "react": "19.1.0",
     "react-day-picker": "^9.7.0",
-    "react-dom": "^19.0.0",
+    "react-dom": "19.1.0",
+    "react-number-formatter": "^1.0.29",
+    "resend": "^4.5.2",
     "sonner": "^2.0.5",
     "stripe": "^18.2.1",
     "tailwind-merge": "^3.3.0",
@@ -64,6 +68,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.3.3",
     "prettier": "^3.5.3",
+    "react-email": "4.0.16",
     "tailwindcss": "^4",
     "tw-animate-css": "^1.3.4",
     "typescript": "^5"
