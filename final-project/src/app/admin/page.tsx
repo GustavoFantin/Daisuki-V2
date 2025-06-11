@@ -32,17 +32,16 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import type { Girl } from "@/type";
+import { GirlFormData } from "@/type";
 
 const RentalGirlfriendAdmin = () => {
-    const [girlfriends, setGirlfriends] = useState<Girl[]>([]);
+    const [girlfriends, setGirlfriends] = useState<GirlFormData[]>([]);
     const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
     const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-    const [currentGirlfriend, setCurrentGirlfriend] = useState<Girl | null>(
-        null
-    );
-    const [formData, setFormData] = useState<Girl>({
+    const [currentGirlfriend, setCurrentGirlfriend] =
+        useState<GirlFormData | null>(null);
+    const [formData, setFormData] = useState<GirlFormData>({
         id: "",
         name: "",
         age: 20,
@@ -52,7 +51,6 @@ const RentalGirlfriendAdmin = () => {
         avatar: undefined,
         self_introduction: "",
         available_time: "",
-        price_id: "",
     });
 
     const router = useRouter();
@@ -79,7 +77,7 @@ const RentalGirlfriendAdmin = () => {
             credentials: "include",
         })
             .then((res) => res.json())
-            .then((data: Girl[]) => setGirlfriends(data))
+            .then((data: GirlFormData[]) => setGirlfriends(data))
             .catch(() => setGirlfriends([]));
     }, [router]);
 
@@ -115,18 +113,17 @@ const RentalGirlfriendAdmin = () => {
             price: 5000,
             self_introduction: "",
             avatar: undefined,
-            price_id: "",
         });
         setIsAddDialogOpen(true);
     };
 
-    const openEditDialog = (girlfriend: Girl) => {
+    const openEditDialog = (girlfriend: GirlFormData) => {
         setCurrentGirlfriend(girlfriend);
         setFormData({ ...girlfriend });
         setIsEditDialogOpen(true);
     };
 
-    const openDeleteDialog = (girlfriend: Girl) => {
+    const openDeleteDialog = (girlfriend: GirlFormData) => {
         setCurrentGirlfriend(girlfriend);
         setIsDeleteDialogOpen(true);
     };
@@ -140,7 +137,6 @@ const RentalGirlfriendAdmin = () => {
             form.append("self_introduction", formData.self_introduction);
             form.append("price", String(formData.price));
             form.append("available_time", formData.available_time);
-            form.append("price_id", formData.price_id);
             form.append("age", String(formData.age));
 
             if (formData.avatar) {
@@ -363,15 +359,6 @@ const RentalGirlfriendAdmin = () => {
                             />
                         </div>
                         <div className="grid gap-2">
-                            <Label htmlFor="price_id">Price ID</Label>
-                            <Input
-                                id="price_id"
-                                name="price_id"
-                                value={formData.price_id}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                        <div className="grid gap-2">
                             <Label htmlFor="avatar">Avatar</Label>
                             <Input
                                 id="avatar"
@@ -487,16 +474,6 @@ const RentalGirlfriendAdmin = () => {
                                 value={formData.self_introduction}
                                 onChange={handleInputChange}
                                 rows={3}
-                            />
-                        </div>
-                        <div className="grid gap-2">
-                            <Label htmlFor="edit-price_id">Price ID</Label>
-                            <Input
-                                id="edit-price_id"
-                                name="price_id"
-                                type="text"
-                                value={formData.price_id}
-                                onChange={handleInputChange}
                             />
                         </div>
                         <div className="grid gap-2">

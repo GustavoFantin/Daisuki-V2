@@ -12,6 +12,8 @@ export type Girl = {
     price_id: string;
 };
 
+export type GirlFormData = Omit<Girl, "price_id">;
+
 export type Order = {
     id: string;
     girlName: string;
