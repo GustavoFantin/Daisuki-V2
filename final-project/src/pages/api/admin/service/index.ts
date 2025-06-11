@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { IncomingForm } from "formidable";
 import Service from "@/models/services.model";
 import { uploadFileToS3 } from "@/app/utils/s3Uploader";
+import { getStripePriceId } from "@/app/utils/getStripePriceId";
 
 export const config = {
     api: {
@@ -41,6 +42,11 @@ export default async function handler(
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const getValue = (v: any) => (Array.isArray(v) ? v[0] : v);
 
+            const price_id = await getStripePriceId(
+                getValue(fields.name),
+                avatarUrl
+            );
+
             const service = await Service.create({
                 avatar: avatarUrl,
                 name: getValue(fields.name),
@@ -50,7 +56,7 @@ export default async function handler(
                 self_introduction: getValue(fields.self_introduction),
                 price: Number(getValue(fields.price)),
                 available_time: getValue(fields.available_time),
-                price_id: getValue(fields.price_id),
+                price_id,
             });
 
             res.status(201).json(service);
