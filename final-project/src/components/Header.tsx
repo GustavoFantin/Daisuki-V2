@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
 
-const Header = () => {
+const Header = ({setMenuOpen}: {setMenuOpen: (isOpen: boolean) => void}) => {
   const [userId, setUserId] = useState<string | null>(null);
   const [userInfo, setUserInfo] = useState<any>(null);
   const [open, setOpen] = useState(false);
@@ -117,28 +117,79 @@ const Header = () => {
           />
         </Link>
 
-        <div className="flex items-center gap-4 text-black">
+        <div className='flex gap-4 md:flex hidden'>
+          <div className="flex items-center gap-4 text-black">
           <Link 
-                href="/service-list"
+              href="/service-list"
+              className="text-black-500 hover:text-pink-600 transition duration-300"
+              aria-label="services page"
+          >
+            Services
+          </Link>
+          <Link 
+              href="/about"
+              className="text-black-500 hover:text-pink-600 transition duration-300"
+              aria-label="About page"
+          >
+            About Us
+          </Link>
+          <Link 
+              href="/contact-us"
+              className="text-black-500 hover:text-pink-600 transition duration-300"
+              aria-label="Contact page"
+          >
+            Contact
+          </Link>
+        </div>
+
+        {userId ? (
+            <>
+              <button
+                className="cursor-pointer px-4 py-2 border-black border-1 rounded-full hover:border-pink-600 hover:text-pink-600 hover:scale-110 transition-transform duration-300"
+                onClick={handleLogout}
+              >
+                Log out
+              </button>
+              {isAdmin && (
+                <Link
+                  href="/admin"
+                  className="text-black-500 hover:text-pink-600 transition duration-300"
+                  aria-label="Admin page"
+                >
+                  <span className="text-lg font-bold">
+                    <Info />
+                  </span>
+                </Link>
+              )}
+              <button
+                onClick={() => setOpen(true)}
                 className="text-black-500 hover:text-pink-600 transition duration-300"
-                aria-label="services page"
+                aria-label="Show user info"
+              >
+                <UserCircle className="w-8 h-8" />
+              </button>
+              <UserInfoModal
+                userInfo={userInfo}
+                isEditing={isEditing}
+                setIsEditing={setIsEditing}
+                editForm={editForm}
+                setEditForm={setEditForm}
+                open={open}
+                setOpen={setOpen}
+                handleEditChange={handleEditChange}
+                handleEditSave={handleEditSave}
+              />
+            </>
+          ) : (
+            <button
+              className="cursor-pointer px-4 py-2 border-black border-1 rounded-full hover:border-pink-600 hover:text-pink-600 hover:scale-110 transition-transform duration-300"
+              onClick={() => router.push('/signin')}
             >
-                Services
-            </Link>
-            <Link 
-                href="/about"
-                className="text-black-500 hover:text-pink-600 transition duration-300"
-                aria-label="About page"
-            >
-                About Us
-            </Link>
-            <Link 
-                href="/contact-us"
-                className="text-black-500 hover:text-pink-600 transition duration-300"
-                aria-label="Contact page"
-            >
-                Contact
-            </Link>
+              Login
+            </button>
+          )}
+        </div>
+        <div className='md:hidden flex gap-4'>
           {userId ? (
             <>
               <button
@@ -178,14 +229,20 @@ const Header = () => {
               />
             </>
           ) : (
-              <button
-                className="cursor-pointer px-4 py-2 border-black border-1 rounded-full hover:border-pink-600 hover:text-pink-600 hover:scale-110 transition-transform duration-300"
-                onClick={() => router.push('/signin')}
-              >
-                Login
-              </button>
+            <button
+              className="cursor-pointer px-4 py-2 border-black border-1 rounded-full hover:border-pink-600 hover:text-pink-600 hover:scale-110 transition-transform duration-300"
+              onClick={() => router.push('/signin')}
+            >
+              Login
+            </button>
           )}
+          <button aria-label="burgar menu" className="btn btn-square btn-ghost cursor-pointer" onClick={() => setMenuOpen(true)}>
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 6H21M3 12H21M3 18H21" stroke="black" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
         </div>
+        
       </div>
     </header>
   );

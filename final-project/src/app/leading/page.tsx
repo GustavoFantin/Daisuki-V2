@@ -10,6 +10,8 @@ import './styles.css';
 
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 import Footer from "@/components/Footer";
+import { useState } from "react";
+import BurgerMenu from "@/components/BurgerMenu";
 
 
 const popularGirls = [
@@ -189,156 +191,159 @@ const comments = [
 ]
 
 export default function Leading() {
-    return <>
-      <Header />
-      <section className="flex flex-col mt-20 mb-10 w-screen overflow-hidden justify-center items-center">
-        <div className="w-[1440px] flex">
-          <img 
-            src="/leading/banner.png"
-            alt="banner"
-            className="w-[1440px] h-[500px]"
-          />
-        </div>
-      </section>
-      <section className="mb-10">
-          <h1 className="text-5xl text-center">
-              Popular Partners
-          </h1>
-          <div>
-              <Swiper
-                effect={'coverflow'}
-                grabCursor={true}
-                centeredSlides={true}
-                slidesPerView={'auto'}
-                coverflowEffect={{
-                  rotate: 50,
-                  stretch: 0,
-                  depth: 100,
-                  modifier: 1,
-                  slideShadows: true,
-                }}
-                initialSlide={2}
-                pagination={true}
-                modules={[EffectCoverflow, Pagination]}
-                className="mySwiper h-full"
-              >
-                {
-                  popularGirls.map((popularGirl, index) => (
-                    <SwiperSlide key={index}>
-                        <div
-                            key={index}
-                            className="bg-white w-100 rounded-lg shadow-md overflow-hidden"
-                        >
-                          <div className="flex ">
-                            <img
-                                src={popularGirl.avatar}
-                                alt={popularGirl.name}
-                                className="w-full h-80 object-cover"
-                            />
-                          </div>
-                          <div className="p-4">
-                            <h3 className="text-xl font-semibold text-center">
-                                {popularGirl.name}
-                            </h3>
-                          </div>  
-                          <div className="px-7 pb-4 text-blue-400">
-                            {popularGirl.hashtags?.map((tag, tagIndex) => (
-                                <div key={`${popularGirl}-${tagIndex}`} className="font-bold">#{tag}</div>
-                            ))}
-                          </div>
-                      </div>
-                    </SwiperSlide>
-                  ))
-                }
-            </Swiper>
-          </div>
-      </section>
-      <section>
-        <h1 className="text-5xl text-center">Moments</h1>
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  return <>
+    <Header setMenuOpen={setMenuOpen} />
+    <BurgerMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+    <section className="flex flex-col mt-20 mb-10 w-screen overflow-hidden justify-center items-center">
+      <div className="w-[1440px] flex">
+        <img 
+          src="/leading/banner.png"
+          alt="banner"
+          className="w-[1440px] h-[500px]"
+        />
+      </div>
+    </section>
+    <section className="mb-10">
+        <h1 className="text-5xl text-center">
+            Popular Partners
+        </h1>
         <div>
-          <Swiper
-            effect={'coverflow'}
-            grabCursor={true}
-            centeredSlides={true}
-            slidesPerView={'auto'}
-            coverflowEffect={{
-              rotate: 50,
-              stretch: 0,
-              depth: 100,
-              modifier: 1,
-              slideShadows: true,
-            }}
-            initialSlide={2}
-            pagination={true}
-            modules={[EffectCoverflow, Pagination]}
-            className="mySwiper h-full"
-          >
-            {
-              moments.map((moment, index) => (
-                <SwiperSlide key={index}>
-                  <div className="flex w-100 h-80">
-                    <img 
-                      src={`/leading/${moment}.png`} 
-                      className="w-full h-full object-cover rounded-lg"
-                    /> 
-                  </div>
-                  
-                </SwiperSlide>
-              ))
-            }
+            <Swiper
+              effect={'coverflow'}
+              grabCursor={true}
+              centeredSlides={true}
+              slidesPerView={'auto'}
+              coverflowEffect={{
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+              }}
+              initialSlide={2}
+              pagination={true}
+              modules={[EffectCoverflow, Pagination]}
+              className="mySwiper h-full"
+            >
+              {
+                popularGirls.map((popularGirl, index) => (
+                  <SwiperSlide key={index}>
+                      <div
+                          key={index}
+                          className="bg-white w-100 rounded-lg shadow-md overflow-hidden"
+                      >
+                        <div className="flex ">
+                          <img
+                              src={popularGirl.avatar}
+                              alt={popularGirl.name}
+                              className="w-full h-80 object-cover"
+                          />
+                        </div>
+                        <div className="p-4">
+                          <h3 className="text-xl font-semibold text-center">
+                              {popularGirl.name}
+                          </h3>
+                        </div>  
+                        <div className="px-7 pb-4 text-blue-400">
+                          {popularGirl.hashtags?.map((tag, tagIndex) => (
+                              <div key={`${popularGirl}-${tagIndex}`} className="font-bold">#{tag}</div>
+                          ))}
+                        </div>
+                    </div>
+                  </SwiperSlide>
+                ))
+              }
           </Swiper>
         </div>
-      </section>
-      <section>
-        <h1 className="text-5xl text-center">Comments</h1>
-        <div>
-          <Swiper
-            effect={'coverflow'}
-            grabCursor={true}
-            centeredSlides={true}
-            slidesPerView={'auto'}
-            coverflowEffect={{
-              rotate: 50,
-              stretch: 0,
-              depth: 100,
-              modifier: 1,
-              slideShadows: true,
-            }}
-            pagination={true}
-            initialSlide={2}
-            modules={[EffectCoverflow, Pagination]}
-            className="mySwiper h-full"
-          >
-            {comments.map((comment, index) => (
+    </section>
+    <section>
+      <h1 className="text-5xl text-center">Moments</h1>
+      <div>
+        <Swiper
+          effect={'coverflow'}
+          grabCursor={true}
+          centeredSlides={true}
+          slidesPerView={'auto'}
+          coverflowEffect={{
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: true,
+          }}
+          initialSlide={2}
+          pagination={true}
+          modules={[EffectCoverflow, Pagination]}
+          className="mySwiper h-full"
+        >
+          {
+            moments.map((moment, index) => (
               <SwiperSlide key={index}>
-                <div className="flex flex-col gap-4 w-100 bg-red-50 rounded-4xl px-10 py-5">
-                  <h3 className="text-lg font-bold">
-                    {comment.age} - {comment.name}
-                  </h3>
-                  <div>
-                    {comment.context}
+                <div className="flex w-100 h-80">
+                  <img 
+                    src={`/leading/${moment}.png`} 
+                    className="w-full h-full object-cover rounded-lg"
+                  /> 
+                </div>
+                
+              </SwiperSlide>
+            ))
+          }
+        </Swiper>
+      </div>
+    </section>
+    <section>
+      <h1 className="text-5xl text-center">Comments</h1>
+      <div>
+        <Swiper
+          effect={'coverflow'}
+          grabCursor={true}
+          centeredSlides={true}
+          slidesPerView={'auto'}
+          coverflowEffect={{
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: true,
+          }}
+          pagination={true}
+          initialSlide={2}
+          modules={[EffectCoverflow, Pagination]}
+          className="mySwiper h-full"
+        >
+          {comments.map((comment, index) => (
+            <SwiperSlide key={index}>
+              <div className="flex flex-col gap-4 w-100 bg-red-50 rounded-4xl px-10 py-5">
+                <h3 className="text-lg font-bold">
+                  {comment.age} - {comment.name}
+                </h3>
+                <div>
+                  {comment.context}
+                </div>
+                <div className="flex justify-between items-center">
+                  <div className="flex flex-col">
+                    <div>{comment.locate}</div>
+                    <div>{comment.activity}</div>
+                    <div>{comment.hours} hours</div>
                   </div>
-                  <div className="flex justify-between items-center">
-                    <div className="flex flex-col">
-                      <div>{comment.locate}</div>
-                      <div>{comment.activity}</div>
-                      <div>{comment.hours} hours</div>
-                    </div>
-                    <div className="flex w-10 h-10 rounded-full overflow-hidden">
-                      <img 
-                        src={comment.providerAvatar}
-                        className="object-cover"
-                      />
-                    </div>
+                  <div className="flex w-10 h-10 rounded-full overflow-hidden">
+                    <img 
+                      src={comment.providerAvatar}
+                      className="object-cover"
+                    />
                   </div>
                 </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-          
-        </div>
-      </section>
-      <Footer />
-      <Background />
-    </>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        
+      </div>
+    </section>
+    <Footer />
+    <Background />
+  </>
 }
