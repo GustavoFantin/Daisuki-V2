@@ -3,9 +3,6 @@
 import { toast } from "sonner";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { Slider } from "@/components/ui/slider";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
     Dialog,
     DialogContent,
@@ -18,6 +15,7 @@ import Image from "next/image";
 import Background from "../about/Background";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import BurgerMenu from "@/components/BurgerMenu";
 
 export default function RentalGirlfriendList() {
     const [girls, setGirls] = useState<Girl[]>([]);
@@ -35,29 +33,9 @@ export default function RentalGirlfriendList() {
     const [selectedDate, setSelectedDate] = useState<Date | undefined>(
         new Date()
     );
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
 
     const router = useRouter();
-
-    const sideBarWidth = isSidebarOpen ? "w-64 h-full" : "w-14 h-auto";
-    const sideBarButtonPosition = isSidebarOpen
-        ? "flex justify-end"
-        : "flex justify-center";
-
-    const nationalities = [
-        "Japanese",
-        "Canadian",
-        "Korean",
-        "American",
-        "Australian",
-        "Swedish",
-        "Taiwanese",
-        "Kenyan",
-        "Singaporean",
-        "Mexican",
-        "German",
-        "French",
-    ];
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
@@ -74,7 +52,7 @@ export default function RentalGirlfriendList() {
     }, [router]);
 
     useEffect(() => {
-        fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/services`, {
+        fetch(`/api/services`, {
             credentials: "include",
         })
             .then((res) => res.json())
@@ -87,47 +65,6 @@ export default function RentalGirlfriendList() {
                 setGirls([]);
             });
     }, []);
-
-    useEffect(() => {
-        let filteredGirls = originalGirls.current;
-
-        if (nameFilter) {
-            filteredGirls = filteredGirls.filter((girl) =>
-                girl.name.toLowerCase().includes(nameFilter.toLowerCase())
-            );
-        }
-
-        filteredGirls = filteredGirls.filter(
-            (girl) => girl.age >= ageRange[0] && girl.age <= ageRange[1]
-        );
-
-        filteredGirls = filteredGirls.filter(
-            (girl) =>
-                girl.height >= heightRange[0] && girl.height <= heightRange[1]
-        );
-
-        if (nationalityFilter.length > 0) {
-            filteredGirls = filteredGirls.filter((girl) =>
-                nationalityFilter.includes(girl.nationality)
-            );
-        }
-
-        filteredGirls = filteredGirls.filter(
-            (girl) => girl.price >= priceRange[0] && girl.price <= priceRange[1]
-        );
-
-        setGirls(filteredGirls);
-    }, [nameFilter, ageRange, heightRange, nationalityFilter, priceRange]);
-
-    const toggleNationality = (nationality: string) => {
-        if (nationalityFilter.includes(nationality)) {
-            setNationalityFilter(
-                nationalityFilter.filter((loc) => loc !== nationality)
-            );
-        } else {
-            setNationalityFilter([...nationalityFilter, nationality]);
-        }
-    };
 
     const openProfile = (girl: Girl) => {
         setSelectedGirl(girl);
@@ -142,7 +79,7 @@ export default function RentalGirlfriendList() {
         setIsRentalModalOpen(false);
 
         const res = await fetch(
-            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/purchase/create-checkout-session`,
+            `/api/purchase/create-checkout-session`,
             {
                 method: "POST",
                 credentials: "include",
@@ -175,7 +112,8 @@ export default function RentalGirlfriendList() {
 
     return (
         <>
-            <Header />
+            <Header setMenuOpen={setMenuOpen} />
+            <BurgerMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
             <Background />
             <div className="flex min-h-screen mt-20">
                 {/* Main content */}
@@ -187,7 +125,7 @@ export default function RentalGirlfriendList() {
                     {/* Girls listing */}
                     {girls.length > 0 ? (
                         <div
-                            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-30"
+                            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:px-20 lg:px-30 px-10"
                         >
                             {girls.map((girl, index) => (
                                 <div
