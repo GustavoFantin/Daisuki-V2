@@ -22,42 +22,42 @@ const Header = () => {
     role: '',
   });
 
-//   useEffect(() => {
-//     fetch(`${import.meta.env.VITE_BACKEND_URL}/user/get-user-cookie`, {
-//       credentials: 'include',
-//     })
-//       .then(async res => {
-//         if (!res.ok) throw new Error('No user');
-//         const data = await res.json();
-//         if (data && data.userId) {
-//           setUserId(data.userId);
-//           setIsAdmin(data.role === 'admin');
-//           // setUserInfo(data);
+  useEffect(() => {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user/get-user-cookie`, {
+      credentials: 'include',
+    })
+      .then(async res => {
+        if (!res.ok) throw new Error('No user');
+        const data = await res.json();
+        if (data && data.userId) {
+          setUserId(data.userId);
+          setIsAdmin(data.role === 'admin');
+          // setUserInfo(data);
 
-//           fetch(`${import.meta.env.VITE_BACKEND_URL}/user/${data.userId}`, {
-//             method: 'GET',
-//             credentials: 'include',
-//           })
-//             .then(res => res.json())
-//             .then((userData: any) => {
-//               setUserInfo(userData);
-//               setEditForm({
-//                 username: userData.username || '',
-//                 email: userData.email || '',
-//                 age: userData.age?.toString() || '',
-//                 role: userData.role || '',
-//               });
-//             });
-//         } else {
-//           setUserId(null);
-//           setUserInfo(null);
-//         }
-//       })
-//       .catch(() => {
-//         setUserId(null);
-//         setUserInfo(null);
-//       });
-//   }, [navigate]);
+          fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user/${data.userId}`, {
+            method: 'GET',
+            credentials: 'include',
+          })
+            .then(res => res.json())
+            .then((userData: any) => {
+              setUserInfo(userData);
+              setEditForm({
+                username: userData.username || '',
+                email: userData.email || '',
+                age: userData.age?.toString() || '',
+                role: userData.role || '',
+              });
+            });
+        } else {
+          setUserId(null);
+          setUserInfo(null);
+        }
+      })
+      .catch(() => {
+        setUserId(null);
+        setUserInfo(null);
+      });
+  }, []);
 
   const handleEditChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -68,7 +68,7 @@ const Header = () => {
   const handleEditSave = async () => {
     if (!userId) return;
     const res = await fetch(
-      `${import.meta.env.VITE_BACKEND_URL}/user/${userId}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user/${userId}`,
       {
         method: 'PUT',
         credentials: 'include',
@@ -92,7 +92,7 @@ const Header = () => {
   };
 
   const handleLogout = async () => {
-    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/user/logout`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user/logout`, {
       method: 'post',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
@@ -109,7 +109,7 @@ const Header = () => {
     <header className="fixed top-0 left-0 z-50 w-full">
       <div className="absolute h-20 bg-[radial-gradient(circle_at_10%_20%,rgba(255,192,203,0.3),transparent_70%),radial-gradient(circle_at_90%_80%,rgba(255,182,193,0.2),transparent_100%)] blur-2xl pointer-events-none" />
       <div className="relative bg-transparent px-6 py-4 flex justify-between items-center">
-        <Link href="/service-list" className="flex items-center">
+        <Link href="/leading" className="flex items-center">
           <img
             src="/LOGO.png"
             alt="Heart Logo"
@@ -117,7 +117,14 @@ const Header = () => {
           />
         </Link>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 text-black">
+          <Link 
+                href="/service-list"
+                className="text-black-500 hover:text-pink-600 transition duration-300"
+                aria-label="services page"
+            >
+                Services
+            </Link>
             <Link 
                 href="/about"
                 className="text-black-500 hover:text-pink-600 transition duration-300"
@@ -132,7 +139,7 @@ const Header = () => {
             >
                 Contact
             </Link>
-          {userId && (
+          {userId ? (
             <>
               <button
                 className="cursor-pointer px-4 py-2 border-black border-1 rounded-full hover:border-pink-600 hover:text-pink-600 hover:scale-110 transition-transform duration-300"
@@ -170,6 +177,13 @@ const Header = () => {
                 handleEditSave={handleEditSave}
               />
             </>
+          ) : (
+              <button
+                className="cursor-pointer px-4 py-2 border-black border-1 rounded-full hover:border-pink-600 hover:text-pink-600 hover:scale-110 transition-transform duration-300"
+                onClick={() => router.push('/signin')}
+              >
+                Login
+              </button>
           )}
         </div>
       </div>

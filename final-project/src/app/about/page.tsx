@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Background from "./Background"
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const girls = [
     'girl1_.png',
@@ -101,6 +102,7 @@ export default function About() {
                 </div>
             </section>
         </div>
+        <Footer />
         <Background />
     </div>
 }

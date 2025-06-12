@@ -10,6 +10,7 @@ export type Girl = {
     self_introduction: string;
     available_time: string; // weekend , both
     price_id: string;
+    hashtags?: string[]
 };
 
 export type GirlFormData = Omit<Girl, "price_id">;
