@@ -107,35 +107,35 @@ const Header = ({setMenuOpen}: {setMenuOpen: (isOpen: boolean) => void}) => {
 
   return (
     <header className="fixed top-0 left-0 z-50 w-full">
-      <div className="absolute h-20 bg-[radial-gradient(circle_at_10%_20%,rgba(255,192,203,0.3),transparent_70%),radial-gradient(circle_at_90%_80%,rgba(255,182,193,0.2),transparent_100%)] blur-2xl pointer-events-none" />
-      <div className="relative bg-transparent px-6 py-4 flex justify-between items-center">
+      {/* <div className="absolute h-20 bg-[radial-gradient(circle_at_10%_20%,rgba(255,192,203,0.3),transparent_70%),radial-gradient(circle_at_90%_80%,rgba(255,182,193,0.2),transparent_100%)] blur-2xl pointer-events-none" /> */}
+      <div className="bg-transparent px-6 py-4 flex justify-between items-center">
         <Link href="/leading" className="flex items-center">
           <img
             src="/LOGO.png"
             alt="Heart Logo"
-            className="w-7 h-7 hover:scale-110 transition-transform duration-300"
+            className="w-13 h-13 hover:scale-110 transition-transform duration-300 rounded-full"
           />
         </Link>
 
         <div className='flex gap-4 md:flex hidden'>
-          <div className="flex items-center gap-4 text-black">
+          <div className="flex items-center gap-4 text-black!">
           <Link 
               href="/service-list"
-              className="text-black-500 hover:text-pink-600 transition duration-300"
+              className="text-black! hover:text-pink-600 transition duration-300"
               aria-label="services page"
           >
             Services
           </Link>
           <Link 
               href="/about"
-              className="text-black-500 hover:text-pink-600 transition duration-300"
+              className="text-black! hover:text-pink-600 transition duration-300"
               aria-label="About page"
           >
             About Us
           </Link>
           <Link 
               href="/contact-us"
-              className="text-black-500 hover:text-pink-600 transition duration-300"
+              className="text-black! hover:text-pink-600 transition duration-300"
               aria-label="Contact page"
           >
             Contact
@@ -153,7 +153,7 @@ const Header = ({setMenuOpen}: {setMenuOpen: (isOpen: boolean) => void}) => {
               {isAdmin && (
                 <Link
                   href="/admin"
-                  className="text-black-500 hover:text-pink-600 transition duration-300"
+                  className="text-black! hover:text-pink-600 transition duration-300"
                   aria-label="Admin page"
                 >
                   <span className="text-lg font-bold">
@@ -163,7 +163,7 @@ const Header = ({setMenuOpen}: {setMenuOpen: (isOpen: boolean) => void}) => {
               )}
               <button
                 onClick={() => setOpen(true)}
-                className="text-black-500 hover:text-pink-600 transition duration-300"
+                className="text-black! hover:text-pink-600 transition duration-300"
                 aria-label="Show user info"
               >
                 <UserCircle className="w-8 h-8" />
@@ -201,7 +201,7 @@ const Header = ({setMenuOpen}: {setMenuOpen: (isOpen: boolean) => void}) => {
               {isAdmin && (
                 <Link
                   href="/admin"
-                  className="text-black-500 hover:text-pink-600 transition duration-300"
+                  className="text-black! hover:text-pink-600 transition duration-300"
                   aria-label="Admin page"
                 >
                   <span className="text-lg font-bold">
@@ -211,7 +211,7 @@ const Header = ({setMenuOpen}: {setMenuOpen: (isOpen: boolean) => void}) => {
               )}
               <button
                 onClick={() => setOpen(true)}
-                className="text-black-500 hover:text-pink-600 transition duration-300"
+                className="text-black! hover:text-pink-600 transition duration-300"
                 aria-label="Show user info"
               >
                 <UserCircle className="w-8 h-8" />

@@ -44,7 +44,7 @@ const SignInPage = () => {
       }
 
 
-      router.push("/service-list");
+      router.push("/leading");
     } catch (e) {
       setError("Sign in failed");
       console.error("Sign in failed", e);
