@@ -63,9 +63,13 @@ const RentalGirlfriendAdmin = () => {
             }
         )
             .then(async (res) => {
-                if (!res.ok) throw new Error("No user");
+                if (!res.ok) 
+                    {
+                        router.replace("/service-list");                        
+                        throw new Error("No user")
+                    };
                 const data = await res.json();
-                if (data && data.role !== "admin") {
+                if (!data || data.role !== "admin") {
                     router.replace("/service-list");
                 }
             })
@@ -218,16 +222,16 @@ const RentalGirlfriendAdmin = () => {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {girlfriends.map((gf) => (
                         <Card
                             key={gf.id}
                             className="bg-gray-50 hover:bg-white transition-colors"
                         >
                             <CardContent className="p-4">
-                                <div className="flex items-center justify-between">
+                                <div className="flex items-center flex-col justify-between">
                                     <div className="flex items-center gap-4">
-                                        <Avatar className="h-12 w-12">
+                                        <Avatar className="h-25 w-25">
                                             <AvatarImage
                                                 src={
                                                     gf.avatar instanceof File
@@ -248,22 +252,22 @@ const RentalGirlfriendAdmin = () => {
                                             <p className="text-sm text-gray-500">
                                                 {gf.age} yrs • {gf.nationality}{" "}
                                                 • ${gf.price.toLocaleString()}
-                                                /day
+                                                /hour
                                             </p>
                                         </div>
                                     </div>
-                                    <div className="flex gap-2">
+                                    <div className="flex gap-2 mt-5">
                                         <Button
                                             onClick={() => openEditDialog(gf)}
                                             variant="outline"
-                                            className="bg-black text-white hover:bg-gray-800 hover:text-white rounded-full px-6 cursor-pointer"
+                                            className="bg-black border-none text-white hover:bg-gray-800 hover:text-white rounded-full px-6 cursor-pointer"
                                         >
                                             Edit
                                         </Button>
                                         <Button
                                             onClick={() => openDeleteDialog(gf)}
                                             variant="outline"
-                                            className="bg-white text-black border-black hover:bg-gray-100 rounded-full px-6 cursor-pointer"
+                                            className="bg-white text-black border-black hover:bg-red-500 hover:text-white hover:border-red-500 rounded-full px-6 cursor-pointer"
                                         >
                                             Delete
                                         </Button>
@@ -339,7 +343,7 @@ const RentalGirlfriendAdmin = () => {
                             </Select>
                         </div>
                         <div className="grid gap-2">
-                            <Label htmlFor="price">Price (per day / CAD)</Label>
+                            <Label htmlFor="price">Price (per hour / CAD)</Label>
                             <Input
                                 id="price"
                                 name="price"
@@ -360,6 +364,20 @@ const RentalGirlfriendAdmin = () => {
                         </div>
                         <div className="grid gap-2">
                             <Label htmlFor="avatar">Avatar</Label>
+                            <Avatar className="h-15 w-15">
+                                <AvatarImage
+                                    src={
+                                        formData.avatar instanceof File
+                                            ? URL.createObjectURL(
+                                                    formData.avatar
+                                                )
+                                            : formData.avatar
+                                    }
+                                />
+                                <AvatarFallback className="bg-gray-200">
+                                    {formData.name.charAt(0)}
+                                </AvatarFallback>
+                            </Avatar>
                             <Input
                                 id="avatar"
                                 name="avatar"
@@ -387,7 +405,7 @@ const RentalGirlfriendAdmin = () => {
 
             {/* Edit Dialog */}
             <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-                <DialogContent className="sm:max-w-md">
+                <DialogContent className="max-w-xs md:max-w-lg h-[80%] md:h-[95%] overflow-y-auto">
                     <DialogHeader>
                         <DialogTitle>Edit Profile</DialogTitle>
                     </DialogHeader>
@@ -454,7 +472,7 @@ const RentalGirlfriendAdmin = () => {
                         </div>
                         <div className="grid gap-2">
                             <Label htmlFor="edit-price">
-                                Price (per day / CAD)
+                                Price (per hour / CAD)
                             </Label>
                             <Input
                                 id="edit-price"
@@ -478,6 +496,20 @@ const RentalGirlfriendAdmin = () => {
                         </div>
                         <div className="grid gap-2">
                             <Label htmlFor="edit-avatar">Avatar</Label>
+                            <Avatar className="h-15 w-15">
+                                <AvatarImage
+                                    src={
+                                        formData.avatar instanceof File
+                                            ? URL.createObjectURL(
+                                                    formData.avatar
+                                                )
+                                            : formData.avatar
+                                    }
+                                />
+                                <AvatarFallback className="bg-gray-200">
+                                    {formData.name.charAt(0)}
+                                </AvatarFallback>
+                            </Avatar>
                             <Input
                                 id="edit-avatar"
                                 name="avatar"
