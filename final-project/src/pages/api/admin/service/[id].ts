@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { IncomingForm } from "formidable";
 import Service from "@/models/services.model";
 import { uploadFileToS3 } from "@/app/utils/s3Uploader";
+import { connectDB } from "@/lib/mongodb";
 
 export const config = {
     api: {
@@ -14,6 +15,7 @@ export default async function handler(
     res: NextApiResponse
 ) {
     const { id } = req.query;
+    await connectDB();
 
     if (req.method === "PUT") {
         const form = new IncomingForm();

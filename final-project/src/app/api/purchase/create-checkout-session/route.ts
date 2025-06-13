@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
     const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY!;
-    const FRONTEND_URL = process.env.FRONTEND_URL!;
+    const FRONTEND_URL = process.env.NEXT_PUBLIC_FRONTEND_URL!;
 
     const stripe = new Stripe(STRIPE_SECRET_KEY, {
         apiVersion: "2025-05-28.basil",
