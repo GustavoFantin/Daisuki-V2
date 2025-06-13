@@ -26,7 +26,7 @@ const UserProfilePage = () => {
 
     useEffect(() => {
         if (!userId) return;
-        fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/${userId}`, {
+        fetch(`/user/${userId}`, {
             method: "GET",
             credentials: "include",
         })
@@ -47,7 +47,7 @@ const UserProfilePage = () => {
 
     const handleSave = async () => {
         if (!formData || !userId) return;
-        await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/${userId}`, {
+        await fetch(`/user/${userId}`, {
             method: "PUT",
             credentials: "include",
             headers: { "Content-Type": "application/json" },

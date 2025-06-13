@@ -57,7 +57,7 @@ const RentalGirlfriendAdmin = () => {
 
     useEffect(() => {
         fetch(
-            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user/get-user-cookie`,
+            `/api/user/get-user-cookie`,
             {
                 credentials: "include",
             }
@@ -77,7 +77,7 @@ const RentalGirlfriendAdmin = () => {
                 console.log("No user data");
             });
 
-        fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/services`, {
+        fetch(`/api/services`, {
             credentials: "include",
         })
             .then((res) => res.json())
@@ -148,7 +148,7 @@ const RentalGirlfriendAdmin = () => {
             }
 
             await fetch(
-                `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/admin/service`,
+                `/api/admin/service`,
                 {
                     credentials: "include",
                     method: "POST",
@@ -166,7 +166,7 @@ const RentalGirlfriendAdmin = () => {
     const handleUpdate = async () => {
         try {
             await fetch(
-                `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/admin/service/${formData.id}`,
+                `/api/admin/service/${formData.id}`,
                 {
                     credentials: "include",
                     method: "PUT",
@@ -186,7 +186,7 @@ const RentalGirlfriendAdmin = () => {
     const handleDelete = async () => {
         try {
             await fetch(
-                `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/admin/service/${currentGirlfriend?.id}`,
+                `/api/admin/service/${currentGirlfriend?.id}`,
                 {
                     method: "DELETE",
                     credentials: "include",

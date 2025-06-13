@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import { generateToken } from "@/app/utils/jwt";
 import { cookies } from "next/headers";
+import { connectDB } from "@/lib/mongodb";
 
 export async function POST(req: Request) {
     try {
@@ -13,6 +14,7 @@ export async function POST(req: Request) {
                 status: 400,
             });
         }
+        await connectDB()
         const user = await User.findOne({ username });
 
         if (!user) {
@@ -38,15 +40,16 @@ export async function POST(req: Request) {
 
             console.log("Generated Token:", token);
 
-            const serverCookies = await cookies();
-            serverCookies.set("token", token, {
+            const response = NextResponse.json({ message: "Login success", status: 200 });
+
+            response.cookies.set("token", token, {
                 httpOnly: true,
-                sameSite: "none",
+                sameSite: "strict",
                 maxAge: 60 * 60 * 1000,
                 secure: true,
             });
 
-            return NextResponse.json({ message: "Login success", status: 200 });
+            return response
         } else {
             return NextResponse.json({
                 message: "Username/Password incorrect!",

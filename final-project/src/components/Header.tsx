@@ -23,7 +23,7 @@ const Header = ({setMenuOpen}: {setMenuOpen: (isOpen: boolean) => void}) => {
   });
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user/get-user-cookie`, {
+    fetch(`/api/user/get-user-cookie`, {
       credentials: 'include',
     })
       .then(async res => {
@@ -34,7 +34,7 @@ const Header = ({setMenuOpen}: {setMenuOpen: (isOpen: boolean) => void}) => {
           setIsAdmin(data.role === 'admin');
           // setUserInfo(data);
 
-          fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user/${data.userId}`, {
+          fetch(`/api/user/${data.userId}`, {
             method: 'GET',
             credentials: 'include',
           })
@@ -68,7 +68,7 @@ const Header = ({setMenuOpen}: {setMenuOpen: (isOpen: boolean) => void}) => {
   const handleEditSave = async () => {
     if (!userId) return;
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user/${userId}`,
+      `/api/user/${userId}`,
       {
         method: 'PUT',
         credentials: 'include',
@@ -92,7 +92,7 @@ const Header = ({setMenuOpen}: {setMenuOpen: (isOpen: boolean) => void}) => {
   };
 
   const handleLogout = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user/logout`, {
+    const res = await fetch(`/api/user/logout`, {
       method: 'post',
       credentials: 'include',
       headers: { 'Content-Type': 'application/json' },
@@ -163,10 +163,20 @@ const Header = ({setMenuOpen}: {setMenuOpen: (isOpen: boolean) => void}) => {
               )}
               <button
                 onClick={() => setOpen(true)}
-                className="text-black! hover:text-pink-600 transition duration-300"
+                className="text-black! hover:text-pink-600 transition duration-300 cursor-pointer"
                 aria-label="Show user info"
               >
-                <UserCircle className="w-8 h-8" />
+                <svg width="30" height="30" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_225_2)">
+                <path d="M14 11.3344L10.3344 10.6687C10 10 10 9.70938 10 9.33438C10.3344 9 11 8.66875 11 8.33438C11.3344 7.33438 11.3344 6.66875 11.3344 6.66875C11.5063 6.41875 12 6.00312 12 5.33437C12 4.66562 11.3344 4 11.3344 3.66875C11.3344 1 9.975 0 8 0C6.10938 0 4.66563 1 4.66563 3.66563C4.66563 4 4 4.66563 4 5.33125C4 5.99688 4.475 6.4375 4.66563 6.66563C4.66563 6.66563 4.66563 7.33125 5 8.33125C5 8.66563 5.66563 8.99688 6 9.33125C6 9.66563 6 9.99687 5.66563 10.6656L2 11.3344C0.665625 11.6656 0 14 0 16H16C16 14 15.3344 11.6656 14 11.3344Z" fill="black"/>
+                </g>
+                <defs>
+                <clipPath id="clip0_225_2">
+                <rect width="16" height="16" fill="white"/>
+                </clipPath>
+                </defs>
+                </svg>
+
               </button>
               <UserInfoModal
                 userInfo={userInfo}
@@ -211,10 +221,19 @@ const Header = ({setMenuOpen}: {setMenuOpen: (isOpen: boolean) => void}) => {
               )}
               <button
                 onClick={() => setOpen(true)}
-                className="text-black! hover:text-pink-600 transition duration-300"
+                className="text-black! hover:text-pink-600 transition duration-300 cursor-pointer"
                 aria-label="Show user info"
               >
-                <UserCircle className="w-8 h-8" />
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_225_2)">
+                  <path d="M14 11.3344L10.3344 10.6687C10 10 10 9.70938 10 9.33438C10.3344 9 11 8.66875 11 8.33438C11.3344 7.33438 11.3344 6.66875 11.3344 6.66875C11.5063 6.41875 12 6.00312 12 5.33437C12 4.66562 11.3344 4 11.3344 3.66875C11.3344 1 9.975 0 8 0C6.10938 0 4.66563 1 4.66563 3.66563C4.66563 4 4 4.66563 4 5.33125C4 5.99688 4.475 6.4375 4.66563 6.66563C4.66563 6.66563 4.66563 7.33125 5 8.33125C5 8.66563 5.66563 8.99688 6 9.33125C6 9.66563 6 9.99687 5.66563 10.6656L2 11.3344C0.665625 11.6656 0 14 0 16H16C16 14 15.3344 11.6656 14 11.3344Z" fill="black"/>
+                  </g>
+                  <defs>
+                  <clipPath id="clip0_225_2">
+                  <rect width="16" height="16" fill="white"/>
+                  </clipPath>
+                  </defs>
+                </svg>
               </button>
               <UserInfoModal
                 userInfo={userInfo}

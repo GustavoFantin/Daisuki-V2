@@ -1,3 +1,5 @@
+'use client'
+
 import './styles.css'
 import { Background } from './Background'
 import { Button } from "@/components/ui/button";

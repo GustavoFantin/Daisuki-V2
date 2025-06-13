@@ -7,7 +7,7 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import BurgerMenu from "@/components/BurgerMenu";
 
-const page = () => {  
+const Page = () => {  
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -21,4 +21,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

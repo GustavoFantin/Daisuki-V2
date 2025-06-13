@@ -4,6 +4,8 @@ import Image from "next/image";
 import Background from "./Background"
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { useState } from "react";
+import BurgerMenu from "@/components/BurgerMenu";
 
 const girls = [
     'girl1_.png',
@@ -15,8 +17,11 @@ const titleClass = 'text-7xl text-center mb-5'
 const sectionClass = 'my-10'
 
 export default function About() {
+    const [menuOpen, setMenuOpen] = useState(false);
+
     return <div className="relative mt-20">
-        <Header />
+        <Header setMenuOpen={setMenuOpen} />
+        <BurgerMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
         <div className="flex flex-col justify-center items-center">
             <section className={sectionClass}>
                 <div className={titleClass}>
