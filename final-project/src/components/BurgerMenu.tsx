@@ -18,21 +18,21 @@ export default function BurgerMenu({menuOpen, setMenuOpen}: {menuOpen: boolean, 
     >
         <Link 
               href="/service-list"
-              className="text-black-500 hover:text-pink-600 transition duration-300"
+              className="text-black! hover:text-pink-600 transition duration-300"
               aria-label="services page"
           >
             Services
           </Link>
           <Link 
               href="/about"
-              className="text-black-500 hover:text-pink-600 transition duration-300"
+              className="text-black! hover:text-pink-600 transition duration-300"
               aria-label="About page"
           >
             About Us
           </Link>
           <Link 
               href="/contact-us"
-              className="text-black-500 hover:text-pink-600 transition duration-300"
+              className="text-black! hover:text-pink-600 transition duration-300"
               aria-label="Contact page"
           >
             Contact
