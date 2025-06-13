@@ -522,6 +522,7 @@ const RentalGirlfriendAdmin = () => {
                         <Button
                             variant="outline"
                             onClick={() => setIsEditDialogOpen(false)}
+                            className="text-black!"
                         >
                             Cancel
                         </Button>

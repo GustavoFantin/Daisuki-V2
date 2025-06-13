@@ -3,6 +3,7 @@ import { IncomingForm } from "formidable";
 import Service from "@/models/services.model";
 import { uploadFileToS3 } from "@/app/utils/s3Uploader";
 import { getStripePriceId } from "@/app/utils/getStripePriceId";
+import { connectDB } from "@/lib/mongodb";
 
 export const config = {
     api: {
@@ -46,6 +47,8 @@ export default async function handler(
                 getValue(fields.name),
                 avatarUrl
             );
+
+            await connectDB();
 
             const service = await Service.create({
                 avatar: avatarUrl,
