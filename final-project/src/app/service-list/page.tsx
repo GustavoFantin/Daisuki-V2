@@ -16,15 +16,10 @@ import Background from "../about/Background";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import BurgerMenu from "@/components/BurgerMenu";
+import { PulseLoader } from 'react-spinners'
 
 export default function RentalGirlfriendList() {
     const [girls, setGirls] = useState<Girl[]>([]);
-    const [nameFilter, setNameFilter] = useState("");
-    const [ageRange, setAgeRange] = useState([18, 30]);
-    const [heightRange, setHeightRange] = useState([150, 175]);
-    const [nationalityFilter, setNationalityFilter] = useState<string[]>([]);
-    const [priceRange, setPriceRange] = useState([90, 200]);
-
     const originalGirls = useRef<Girl[]>([]);
 
     const [selectedGirl, setSelectedGirl] = useState<Girl | null>(null);
@@ -117,7 +112,7 @@ export default function RentalGirlfriendList() {
             <Background />
             <div className="flex min-h-screen mt-20">
                 {/* Main content */}
-                <div className="flex-1 p-6">
+                <div className="flex-1 p-6 flex flex-col">
                     <h1 className="text-6xl font-bold mb-8 text-center">
                         Girlfriends
                     </h1>
@@ -156,9 +151,9 @@ export default function RentalGirlfriendList() {
                             ))}
                         </div>
                     ) : (
-                        <div className="text-center text-gray-500 py-12">
-                            No girls found matching your criteria. Please adjust
-                            your filter settings.
+                        <div className="flex justify-center items-center gap-4 pt-20">
+                            <div className="text-3xl">Loading</div>
+                            <PulseLoader /> 
                         </div>
                     )}
                 </div>

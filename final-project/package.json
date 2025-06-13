@@ -51,6 +51,7 @@
     "react-hot-toast": "^2.5.2",
     "react-icons": "^5.5.0",
     "react-number-formatter": "^1.0.29",
+    "react-spinners": "^0.17.0",
     "resend": "^4.5.2",
     "sonner": "^2.0.5",
     "stripe": "^18.2.1",
