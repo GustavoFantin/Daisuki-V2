@@ -1,37 +1,73 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/7PNkbV4c)
-# React JS - Final Project
+# 💘 Daisuki – Social Companion Matching Platform
 
-**Goal:** Create a shopping website with your category of choice (electronics, food, clothes, toys, etc.)
+Daisuki is a web platform designed to connect users with companions for casual dates, meetups, or events — strictly non-romantic and non-sexual. The goal is to provide a safe and respectful space for social interaction and company.
 
-## Installation ⚙
+## 🚀 Live Demo
 
-Create a NextJS project with `npx create-next-app final-project`.
+[🔗 View Live on Vercel]((https://daisuki-ver2.vercel.app/))  
 
-## Requirements ✅
+---
 
-- You must use a database (MongoDB or Postgres) for data storage.
-- There should be two roles, one for user and one for admin. Admin can add new products while the user can only view and checkout.
-- Implement checkout using Stripe or PayPal API.
-- Your website should have these pages:
+## 🧠 Features
 
-  - Home
-  - Login/Signup page
-  - Products List with images and Add to Cart button
-  - Add Product page
-  - Edit Product page
-  - View Product Detail page
-  - View Cart page
-  - Checkout page
-  - About page
-  - Contact page with a working contact form
+- 🖥️ Fully responsive UI built with **Next.js** and **Tailwind CSS**
+- 🧩 3D interactive animations for enhanced visual experience
+- 🔐 Authentication system (JWT)
+- 📦 MongoDB database integration for user profiles and scheduling
+- 📸 Image uploads using **AWS S3**
+- ⚙️ API Routes with secure server-side logic
+- 🌐 SEO-ready pages using server-side rendering (SSR)
 
-- The website should have CRUD functionality (Create, Retrieve, Update, Delete). Use **Server Actions** or **Route Handlers**.
-- For the product images, use Cloudinary API to store your images and save the image url into your database [https://cloudinary.com/].
-- You must have a Shopping Cart sidebar showing the products you added to cart. The same products will appear on the View Cart page.
-- Clicking on the product image on the Product List page should open a modal showing the product image. Use parallel and intercepting routes to achieve this. On the modal, you can display details like Product Name, Product Price, Product Image, Add to Cart button.
+---
 
-## Tips 💡
+## 🧰 Tech Stack
 
-- Please check out Behance [https://www.behance.net/] for some inspiration for your design.
-- You can reuse your past projects' design and functionality.
-- If you are going to use a Google Font, NextJS can support it [https://nextjs.org/docs/app/building-your-application/optimizing/fonts#google-fonts].
+| Category        | Technologies Used                           |
+|----------------|----------------------------------------------|
+| **Frontend**    | Next.js, React, Tailwind CSS                |
+| **Backend**     | Next.js API Routes, Node.js, MongoDB        |
+| **Auth**        | NextAuth.js (or JWT if applicable)          |
+| **Checkout**  | Stripe                                       |
+| **Storage**     | AWS S3                                       |
+| **Deployment**  | Vercel                                       |
+---
+
+## 👨‍👩‍👧‍👦 Team Members & Roles
+
+- **Gustavo Fantin** – Backend & Authentication  
+- **Phil** – Backend & 3D animations  
+- **Koya** – Frontend & Team management  
+- **Kendrick** – Frontend & 3D animations
+
+---
+
+## 📸 Screenshots
+
+###Login page
+**Desktop:**\
+ <img src="https://github.com/user-attachments/assets/10e0277a-ecd3-410e-8011-5861da8d0a07" alt="Desktop Index" width="700">
+
+
+**Mobile:**\
+ <img src="https://github.com/user-attachments/assets/2bfb6e3a-d5c6-48f4-a5a2-34c6466041da" alt="Mobile Index" width="350">
+
+
+###Services Page
+**Desktop:**\
+ <img src="https://github.com/user-attachments/assets/39b0b362-d1df-4d92-b753-76f5339ec88a" alt="Services Pages" width="700">
+
+
+**Mobile:**\
+ <img src="https://github.com/user-attachments/assets/d3712aa6-8b91-4a08-acd7-a15ce8adaf62" alt="Services Pages" width="350">
+
+###Home Page
+**Desktop:**\
+ <img src="https://github.com/user-attachments/assets/39b0b362-d1df-4d92-b753-76f5339ec88a" alt="Home Page" width="700">
+
+
+**Mobile:**\
+ <img src="https://github.com/user-attachments/assets/d6d1d7ef-62e3-4a5c-a0ff-e4553d449939" alt="Home Page" width="350">
+
+
+  
+---
